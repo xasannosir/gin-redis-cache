@@ -18,7 +18,7 @@ A lightweight, production-ready Redis caching middleware for Gin web framework. 
 To install the cache package, use the following command:
 
 ```bash
-  go get github.com/xasannosir/gin-redis-cache
+go get github.com/xasannosir/gin-redis-cache
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ To install the cache package, use the following command:
 Import the cache package in your Go code:
 
 ```bash
-  import "github.com/xasannosir/gin-redis-cache"
+import "github.com/xasannosir/gin-redis-cache"
 ```
 
 ## Usage Examples

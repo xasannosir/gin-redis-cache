@@ -52,18 +52,12 @@ func NewRedisCache(cfg RedisConfig) (Cache, error) {
 
 // Set stores a value in the cache with the given key and TTL
 func (r *redisCache) Set(ctx context.Context, key string, value interface{}, ttl time.Duration) error {
-	// Marshal value to JSON (except for []byte and string)
+	// Marshal value to JSON (except for []byte)
 	var data = value
 
 	switch v := value.(type) {
 	case []byte:
 		data = v
-	case string:
-		jsonData, err := json.Marshal(v)
-		if err != nil {
-			return err
-		}
-		data = jsonData
 	default:
 		jsonData, err := json.Marshal(v)
 		if err != nil {

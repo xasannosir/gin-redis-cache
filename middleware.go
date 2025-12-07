@@ -131,11 +131,6 @@ func SetOrGetCache(cache Cache, config CacheConfig) gin.HandlerFunc {
 				return
 			}
 
-			// Log cache miss error if it's not a "key not found" error
-			if err != nil && err.Error() != "redis: nil" {
-				config.Logger("cache get error for key %s: %v", cacheKey, err)
-			}
-
 			// Cache miss: capture response for caching
 			writer := &responseWriter{
 				ResponseWriter: c.Writer,
