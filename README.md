@@ -1,6 +1,6 @@
 # Gin Redis Cache
 
-A lightweight, production-ready Redis caching middleware for Gin web framework. This package provides intelligent HTTP response caching with automatic cache invalidation support.
+A production-ready Redis caching middleware for Gin web framework. This package provides intelligent HTTP response caching with automatic cache invalidation support.
 
 ## Features
 
@@ -8,7 +8,7 @@ A lightweight, production-ready Redis caching middleware for Gin web framework. 
 - **Redis Backend**: Uses Redis for distributed caching
 - **Smart Cache Invalidation**: Automatically invalidates related cache entries on mutations
 - **Query Parameter Support**: Generates unique cache keys based on paths and query parameters
-- **Configurable TTL**: Per-endpoint or global time-to-live settings
+- **Configurable TTL**: Global time-to-live settings
 - **Flexible Exclusion**: Skip caching for specific endpoints
 - **Resource Grouping**: Define relationships between resources for cascading invalidation
 - **Custom Logging**: Optional logger function for debugging

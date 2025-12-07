@@ -23,8 +23,12 @@ type TestRedisCache struct {
 }
 
 // NewTestCache creates a new RedisCache instance for testing
-func NewTestCache(cfg RedisConfig) *TestRedisCache {
-	client, _ := NewRedisCache(cfg)
+func NewTestCache(t *testing.T, cfg RedisConfig) *TestRedisCache {
+	client, err := NewRedisCache(cfg)
+
+	if err != nil {
+		t.Fatalf("NewRedisCache() failed: %v", err)
+	}
 
 	return &TestRedisCache{
 		Cache: client,
@@ -294,7 +298,7 @@ func TestCache(t *testing.T) {
 	}
 
 	// Create RedisCache instance for testing
-	instance := NewTestCache(cfg)
+	instance := NewTestCache(t, cfg)
 
 	// Run all tests
 	t.Run("String_Values", instance.TestSetGetDel_String)

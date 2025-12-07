@@ -11,6 +11,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// noopLogger is a silent logger that does nothing
+var noopLogger = func(format string, args ...interface{}) {
+	// Silent - no logging
+}
+
 type CacheConfig struct {
 	// TTL is the default time-to-live for cached responses
 	TTL time.Duration
@@ -77,6 +82,10 @@ func getCacheKey(c *gin.Context) string {
 // GET requests: serve from cache if available, otherwise cache the response
 // POST/PUT/PATCH/DELETE requests: invalidate related caches
 func SetOrGetCache(cache Cache, config CacheConfig) gin.HandlerFunc {
+	if config.Logger == nil {
+		config.Logger = noopLogger
+	}
+
 	return func(c *gin.Context) {
 		method := c.Request.Method
 		path := c.Request.URL.Path
