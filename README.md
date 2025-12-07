@@ -26,7 +26,7 @@ To install the cache package, use the following command:
 Import the cache package in your Go code:
 
 ```bash
-  imort "github.com/xasannosir/gin-redis-cache"
+  import "github.com/xasannosir/gin-redis-cache"
 ```
 
 ## Usage Examples
@@ -37,8 +37,9 @@ package main
 import (
     "fmt"
     "time"
+	
     "github.com/gin-gonic/gin"
-    cache "github.com/xasannosir/gin-redis-cache"
+    "github.com/xasannosir/gin-redis-cache"
 )
 
 func main() {
@@ -73,18 +74,7 @@ func main() {
     // Apply caching middleware
     router.Use(cache.SetOrGetCache(cacheInstance, config))
 
-    // Define your routes
-    router.GET("/v1/product/:id", func(c *gin.Context) {
-        c.JSON(200, gin.H{
-            "id": c.Param("id"),
-            "name": "Sample Product",
-        })
-    })
-
-    router.POST("/v1/product", func(c *gin.Context) {
-        // This will invalidate all product and related caches
-        c.JSON(201, gin.H{"status": "created"})
-    })
+    // Define your routes here ...
 
     router.Run(":8080")
 }

@@ -52,7 +52,27 @@ func NewRedisCache(cfg RedisConfig) (Cache, error) {
 
 // Set stores a value in the cache with the given key and TTL
 func (r *redisCache) Set(ctx context.Context, key string, value interface{}, ttl time.Duration) error {
-	return r.client.Set(ctx, key, value, ttl).Err()
+	// Marshal value to JSON (except for []byte and string)
+	var data = value
+
+	switch v := value.(type) {
+	case []byte:
+		data = v
+	case string:
+		jsonData, err := json.Marshal(v)
+		if err != nil {
+			return err
+		}
+		data = jsonData
+	default:
+		jsonData, err := json.Marshal(v)
+		if err != nil {
+			return err
+		}
+		data = jsonData
+	}
+
+	return r.client.Set(ctx, key, data, ttl).Err()
 }
 
 // Get retrieves a value from the cache and unmarshal it into the wanted interface
