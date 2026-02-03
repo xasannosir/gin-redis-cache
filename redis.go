@@ -87,6 +87,10 @@ func (r *redisCache) Get(ctx context.Context, key string, wanted interface{}) er
 
 // Del deletes keys from the cache
 func (r *redisCache) Del(ctx context.Context, keys ...string) error {
+	if len(keys) == 0 {
+		return nil
+	}
+
 	return r.client.Del(ctx, keys...).Err()
 }
 

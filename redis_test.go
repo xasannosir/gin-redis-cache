@@ -287,6 +287,22 @@ func (c *TestRedisCache) TestDelWildCard(t *testing.T) {
 	}
 }
 
+// DeleteEmpty tests the Del, DelWildCard method with keys which is empty
+func (c *TestRedisCache) DeleteEmpty(t *testing.T) {
+	ctx := context.Background()
+
+	// test Del method with empty slice
+	err := c.Del(ctx, []string{}...)
+	assert.NoError(t, err, "error while deleting empty slice")
+
+	err = c.Del(ctx)
+	assert.NoError(t, err, "error while deleting empty slice")
+
+	// test DelWildCard method with empty data in Redis storage
+	err = c.DelWildCard(ctx, "*")
+	assert.NoError(t, err, "error while deleting empty wildcard")
+}
+
 // TestCache runs all cache tests
 func TestCache(t *testing.T) {
 	// Setup test configuration
@@ -305,4 +321,5 @@ func TestCache(t *testing.T) {
 	t.Run("Struct_Values", instance.TestSetGetDel_Struct)
 	t.Run("Bytes_Values", instance.TestSetGetDel_Bytes)
 	t.Run("Wildcard_Delete", instance.TestDelWildCard)
+	t.Run("Delete Empty", instance.DeleteEmpty)
 }
