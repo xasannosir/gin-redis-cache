@@ -66,8 +66,8 @@ func main() {
             "product": {"inventory", "category"},
             "user":    {"profile", "settings"},
         },
-        Logger: func(format string, args ...interface{}) {
-            fmt.Printf("[Cache] "+format+"\n", args...)
+        Logger: func(message string, args ...interface{}) {
+            fmt.Printf("[Cache] "+message+"\n", args...)
         },
     }
 

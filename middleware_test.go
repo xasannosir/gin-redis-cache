@@ -44,7 +44,7 @@ func TestMiddleware_GetRequest_CacheHit(t *testing.T) {
 		TTL:      10 * time.Second,
 		Groups:   map[string][]string{},
 		Outdoors: []string{},
-		Logger:   func(format string, args ...interface{}) {},
+		Logger:   func(message string, args ...interface{}) {},
 	}
 
 	router := setupTestRouter(cache, config)
@@ -109,7 +109,7 @@ func TestMiddleware_GetRequest_WithQueryParams(t *testing.T) {
 		TTL:      10 * time.Second,
 		Groups:   map[string][]string{},
 		Outdoors: []string{},
-		Logger:   func(format string, args ...interface{}) {},
+		Logger:   func(message string, args ...interface{}) {},
 	}
 
 	router := setupTestRouter(cache, config)
@@ -178,7 +178,7 @@ func TestMiddleware_PostRequest_InvalidatesCache(t *testing.T) {
 		TTL:      10 * time.Second,
 		Groups:   map[string][]string{},
 		Outdoors: []string{},
-		Logger:   func(format string, args ...interface{}) {},
+		Logger:   func(message string, args ...interface{}) {},
 	}
 
 	router := setupTestRouter(cache, config)
@@ -246,7 +246,7 @@ func TestMiddleware_PutRequest_InvalidatesCache(t *testing.T) {
 		TTL:      10 * time.Second,
 		Groups:   map[string][]string{},
 		Outdoors: []string{},
-		Logger:   func(format string, args ...interface{}) {},
+		Logger:   func(message string, args ...interface{}) {},
 	}
 
 	router := setupTestRouter(cache, config)
@@ -302,7 +302,7 @@ func TestMiddleware_PatchRequest_InvalidatesCache(t *testing.T) {
 		TTL:      10 * time.Second,
 		Groups:   map[string][]string{},
 		Outdoors: []string{},
-		Logger:   func(format string, args ...interface{}) {},
+		Logger:   func(message string, args ...interface{}) {},
 	}
 
 	router := setupTestRouter(cache, config)
@@ -358,7 +358,7 @@ func TestMiddleware_DeleteRequest_InvalidatesCache(t *testing.T) {
 		TTL:      10 * time.Second,
 		Groups:   map[string][]string{},
 		Outdoors: []string{},
-		Logger:   func(format string, args ...interface{}) {},
+		Logger:   func(message string, args ...interface{}) {},
 	}
 
 	router := setupTestRouter(cache, config)
@@ -417,7 +417,7 @@ func TestMiddleware_Groups_InvalidatesRelatedCaches(t *testing.T) {
 			"product": {"category", "brand"},
 		},
 		Outdoors: []string{},
-		Logger:   func(format string, args ...interface{}) {},
+		Logger:   func(message string, args ...interface{}) {},
 	}
 
 	router := setupTestRouter(cache, config)
@@ -504,7 +504,7 @@ func TestMiddleware_Outdoors_SkipsCaching(t *testing.T) {
 		TTL:      10 * time.Second,
 		Groups:   map[string][]string{},
 		Outdoors: []string{"auth", "health"},
-		Logger:   func(format string, args ...interface{}) {},
+		Logger:   func(message string, args ...interface{}) {},
 	}
 
 	router := setupTestRouter(cache, config)
@@ -564,7 +564,7 @@ func TestMiddleware_NonOKStatus_DoesNotCache(t *testing.T) {
 		TTL:      10 * time.Second,
 		Groups:   map[string][]string{},
 		Outdoors: []string{},
-		Logger:   func(format string, args ...interface{}) {},
+		Logger:   func(message string, args ...interface{}) {},
 	}
 
 	router := setupTestRouter(cache, config)

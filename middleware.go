@@ -12,10 +12,12 @@ import (
 )
 
 // noopLogger is a silent logger that does nothing
-var noopLogger = func(format string, args ...interface{}) {
+var noopLogger = func(message string, args ...interface{}) {
 	// Silent - no logging
 }
 
+// CacheConfig defines the configuration for HTTP response caching.
+// It provides control over cache behavior, invalidation rules, and exclusions.
 type CacheConfig struct {
 	// TTL is the default time-to-live for cached responses
 	TTL time.Duration
@@ -28,7 +30,7 @@ type CacheConfig struct {
 	Outdoors []string
 
 	// Logger is an optional custom logger function
-	Logger func(format string, args ...interface{})
+	Logger func(message string, args ...interface{})
 }
 
 // responseWriter wraps gin.ResponseWriter to capture response body for caching
